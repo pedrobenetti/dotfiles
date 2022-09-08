@@ -1,5 +1,6 @@
-" Disable swap files
+set clipboard+=unnamedplus
 
+" Disable swap files
 set noswapfile
 
 " Save undo-trees in files
