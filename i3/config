@@ -126,10 +126,10 @@ exec urxvtc -name htop_scratchpad -e htop
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $Terminals "1: Terminals"
+set $Home "1: Home"
 set $Web "2: Web"
 set $Files "3: Files"
-set $ws4 "4"
+set $Waste "4: Waste of Time"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -138,10 +138,10 @@ set $Comms "9: Comms"
 set $Audio "10: Audio"
 
 # switch to workspace
-bindsym $mod+1 workspace $Terminals
+bindsym $mod+1 workspace $Home
 bindsym $mod+2 workspace $Web
 bindsym $mod+3 workspace $Files
-bindsym $mod+4 workspace $ws4
+bindsym $mod+4 workspace $Waste
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
@@ -150,10 +150,10 @@ bindsym $mod+9 workspace $Comms
 bindsym $mod+0 workspace $Audio
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $Terminals
+bindsym $mod+Shift+1 move container to workspace $Home
 bindsym $mod+Shift+2 move container to workspace $Web
 bindsym $mod+Shift+3 move container to workspace $Files
-bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+4 move container to workspace $Waste
 bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
@@ -163,11 +163,12 @@ bindsym $mod+Shift+0 move container to workspace $Audio
 
 workspace_auto_back_and_forth yes
 
-assign [class="firefox" instance="Navigator"] $Web
+assign [class="firefox" instance="Navigator"] $Home
 assign [class="TelegramDesktop" instance="telegram-desktop"] $Comms
 assign [class="Nemo" instance="nemo"] $Files
 assign [class="Org.gnome.Nautilus" instance="org.gnome.Nautilus"] $Files
 assign [class="discord" instance="discord"] $Comms
+assign [class="Steam" instance="Steam"] $Waste
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
