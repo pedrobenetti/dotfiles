@@ -35,13 +35,12 @@
 *.color7:       #e5e5e5
 *.color15:      #ffffff
 
-URxvt*font: xft:DejaVuSansMono:size:14:antialias=true
+URxvt*font: xft:Inconsolata Nerd Font Mono:style=Medium:size:18:pixelsize=20:antialias=true
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 4
 URxvt*scrollBar: false
 URxvt*saveLines: 5000
-
 URxvt*iso14755: false
 URxvt.iso14755_52: false
 

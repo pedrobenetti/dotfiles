@@ -1,5 +1,4 @@
 source "$XDG_CONFIG_HOME/zsh/aliases"
-source "$DOTFILES/zsh/.zshrc"
 source "$DOTFILES/zsh/scripts.sh"
 
 setopt AUTO_PARAM_SLASH
@@ -32,7 +31,7 @@ for index ({1..9}) alias "$index"="cd +${index}"; unset index
 bindkey -v
 export KEYTIMEOUT=1
 
-zmodload zsh/complis
+zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
@@ -52,4 +51,4 @@ fi
 
 
 source ~/dotfiles/zsh/external/bd.zsh
-source /usr/share/zsh/plugins/zsh-syntax-hihglighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
