@@ -8,6 +8,12 @@ mkdir -p "$XDG_CONFIG_HOME/nvim"
 mkdir -p "$XDG_CONFIG_HOME/nvim/undo"
 ln -sf "$DOTFILES/nvim/init.vim" "$XDG_CONFIG_HOME/nvim" 
 
+#############
+# Alacritty #
+#############
+
+mkdir -p "$XDG_CONFIG_HOME/alacritty"
+ln -sf "$DOTFILES/alacritty/alacritty.yml" "$XDG_CONFIG_HOME/alacritty"
 
 #######
 # X11 #
@@ -53,3 +59,9 @@ ln -sf "$DOTFILES/dunst/dunstrc" "$XDG_CONFIG_HOME/dunst/dunstrc"
 rm -rf "$XDG_CONFIG_HOME/polybar"
 ln -sf "$DOTFILES/polybar" "$XDG_CONFIG_HOME"
 
+#########
+# Picom #
+#########
+
+mkdir -p "$XDG_CONFIG_HOME/picom"
+ln -sf "$DOTFILES/picom/picom.conf" "$XDG_CONFIG_HOME/picom"

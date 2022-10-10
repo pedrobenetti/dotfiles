@@ -11,16 +11,17 @@ set $mod Mod4
 #  Fonts 
 # =======
 #font pango: MesloLGS NF 10
-font pango:DejaVu Sans Mono 12
+#font pango:DejaVu Sans Mono 10
+font pango: monospace 10
 
 
 # ==============
 #  Startup Apps
 # ==============
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
-exec --no-startup-id dunst
+#exec --no-startup-id dex --autostart --environment i3
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+#exec --no-startup-id nm-applet
+#exec --no-startup-id dunst
 
 
 # =================
@@ -50,7 +51,10 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+Return exec urxvtc
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
+
+# Resize mode
+bindsym $mod+r mode "resize"
 
 # start dmenu 
 bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu'"
@@ -59,6 +63,12 @@ bindsym $mod+p exec --no-startup-id deepin-screen-recorder
 
 # Web Browser
 bindsym $mod+Shift+f exec --no-startup-id firefox    
+
+# Caps Lock to ESC/CTRL
+bindsym $mod+z exec "setxkbmap -option 'caps:ctrl_modifier';xcape -e 'Caps_Lock=Escape'&
+
+# Lock Screen
+bindsym $mod+CTRL+l exec --no-startup-id $i3lockwall
 
 # Change focus - VIM Keys
 bindsym $mod+h focus left
@@ -104,15 +114,45 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+g focus child
 
-# Terminal scratchpad
-for_window [instance="urxvt_scratchpad"] move to scratchpad, border none
-bindsym $mod+Shift+t [instance="urxvt_scratchpad"] scratchpad show
-exec urxvtc -name urxvt_scratchpad
+# Reload the configuration file
+bindsym $mod+Shift+c reload
 
-# htop scratchpad
-for_window [instance="htop_scratchpad"] move to scratchpad, border none
-bindsym $mod+Shift+p [instance="htop_scratchpad"] scratchpad show
-exec urxvtc -name htop_scratchpad -e htop
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Mode System
+bindsym $mod+BackSpace mode "$mode_system"
+
+# Resize window 
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# shutdown / restart / hibernate / ...
+set $mode_system [l] Lock | [e] Logout | [s] Suspend | [h] Hibernatei | [r] Reboot | [Ctrl+s] Shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $i3lockwall, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    bindsym Escape mode default
+}
 
 
 # ========================
@@ -121,17 +161,17 @@ exec urxvtc -name htop_scratchpad -e htop
 
 workspace_auto_back_and_forth no
 focus_follows_mouse no 
-workspace_layout tabbed
 
 title_align center
-default_border pixel 5
 default_floating_border none
-hide_edge_borders both
+#hide_edge_borders smart
 
 # Floating pop up automatically
 for_window [window_role="pop_up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="Arandr"] floating enable
+for_window [class=".*"] border pixel 3
+
 
 # Workspaces Identifiers
 set $ws1 "1"
@@ -173,80 +213,24 @@ assign [class="TelegramDesktop" instance="telegram-desktop"] $ws10
 assign [class="discord" instance="discord"] $ws10
 assign [class="Steam" instance="Steam"] $ws4
 
-# Reload the configuration file
-bindsym $mod+Shift+c reload
-
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# shutdown / restart / hibernate / ...
-set $mode_system [l] Lock | [e] Logout | [s] Suspend | [h] Hibernatei | [r] Reboot | [Ctrl+s] Shutdown
-
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $i3lockwall, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
-
-    # to close the menu
-
-    bindsym Escape mode default
-}
-
-bindsym $mod+BackSpace mode "$mode_system"
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
 
 # ======
 #  Gaps
 # ======
 
-set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
+gaps inner 7
+gaps outer 10
+smart_gaps on
+hide_edge_borders smart
+
+set $mode_gaps Gaps: (o)uter, (i)nner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_horiz Horizontal Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_verti Vertical Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_top Top Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_right Right Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_bottom Bottom Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_left Left Gaps: +|-|0 (local), Shift + +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
         bindsym i      mode "$mode_gaps_inner"
-        bindsym h      mode "$mode_gaps_horiz"
-        bindsym v      mode "$mode_gaps_verti"
-        bindsym t      mode "$mode_gaps_top"
-        bindsym r      mode "$mode_gaps_right"
-        bindsym b      mode "$mode_gaps_bottom"
-        bindsym l      mode "$mode_gaps_left"
         bindsym Return mode "$mode_gaps"
         bindsym Escape mode "default"
 }
@@ -275,91 +259,17 @@ mode "$mode_gaps_inner" {
         bindsym Return mode "$mode_gaps"
         bindsym Escape mode "default"
 }
-mode "$mode_gaps_horiz" {
-        bindsym plus  gaps horizontal current plus 5
-        bindsym minus gaps horizontal current minus 5
-        bindsym 0     gaps horizontal current set 0
-
-        bindsym Shift+plus  gaps horizontal all plus 5
-        bindsym Shift+minus gaps horizontal all minus 5
-        bindsym Shift+0     gaps horizontal all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_verti" {
-        bindsym plus  gaps vertical current plus 5
-        bindsym minus gaps vertical current minus 5
-        bindsym 0     gaps vertical current set 0
-
-        bindsym Shift+plus  gaps vertical all plus 5
-        bindsym Shift+minus gaps vertical all minus 5
-        bindsym Shift+0     gaps vertical all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_top" {
-        bindsym plus  gaps top current plus 5
-        bindsym minus gaps top current minus 5
-        bindsym 0     gaps top current set 0
-
-        bindsym Shift+plus  gaps top all plus 5
-        bindsym Shift+minus gaps top all minus 5
-        bindsym Shift+0     gaps top all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_right" {
-        bindsym plus  gaps right current plus 5
-        bindsym minus gaps right current minus 5
-        bindsym 0     gaps right current set 0
-
-        bindsym Shift+plus  gaps right all plus 5
-        bindsym Shift+minus gaps right all minus 5
-        bindsym Shift+0     gaps right all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_bottom" {
-        bindsym plus  gaps bottom current plus 5
-        bindsym minus gaps bottom current minus 5
-        bindsym 0     gaps bottom current set 0
-
-        bindsym Shift+plus  gaps bottom all plus 5
-        bindsym Shift+minus gaps bottom all minus 5
-        bindsym Shift+0     gaps bottom all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_left" {
-        bindsym plus  gaps left current plus 5
-        bindsym minus gaps left current minus 5
-        bindsym 0     gaps left current set 0
-
-        bindsym Shift+plus  gaps left all plus 5
-        bindsym Shift+minus gaps left all minus 5
-        bindsym Shift+0     gaps left all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
 
 
+##############
+# APPEARANCE #
+##############
 
-
-bindsym $mod+r mode "resize"
-
+# Wallpaper and Lockscreen
+#exec_always --no-startup-id feh --no-fehbg --bg-fill /home/mestrinari/.config/i3/feh/DarkSouls.jpg
 set $i3lockwall i3lock -i /home/mestrinari/.config/i3/feh/lockscreen.png
 
-bindsym $mod+CTRL+l exec --no-startup-id $i3lockwall
-
-exec --no-startup-id feh --no-fehbg --bg-fill /home/mestrinari/.config/i3/feh/ArchWallpaper.png
-
-bindsym $mod+z exec "setxkbmap -option 'caps:ctrl_modifier';xcape -e 'Caps_Lock=Escape'&
+# Colors
 
 # special
 set_from_resource $foreground foreground #C6C6C6
@@ -399,9 +309,7 @@ set_from_resource $cyan2 color14 #afd7ff
 set_from_resource $white1 color7 #4E4E4E
 set_from_resource $white2 color15 #ffffff
 
-##########
-# DESIGN #
-##########
+# Themes 
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
@@ -413,16 +321,18 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 bar {
-    status_command i3status --config ~/.config/i3/i3status.conf
-    colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
+    font pango: FontAwesome 10 
+    position top
+    tray_output none
+        status_command /usr/share/bumblebee-status/bumblebee-status                                     \
+            -m  battery  brightness  pasink  pasource  cpu  memory  time  date \
+                                                                                                            \
+        -p  checkupdates \
+        cpu.format="{:.01f}%"                                                                            \
+        memory.format="{used}/{total}"                                                                   \
+        date.format="%d/%m/%Y" time.format="%H:%M"                                                       \
+        \
+        -t greyish-powerline
 
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
-  }
 }
+
