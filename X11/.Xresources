@@ -35,7 +35,8 @@
 *.color7:       #707880
 *.color15:      #c5c8c6
 
-*.alpha: 8
+URxvt.transparent: true 
+URxvt.shading: 25
 
 URxvt*font: xft:MesloLGS NF-12
 URxvt*letterspace: -1

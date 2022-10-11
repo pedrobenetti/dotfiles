@@ -60,6 +60,13 @@ fi
 source ~/dotfiles/zsh/external/bd.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/dotfiles/zsh/external/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source /opt/asdf-vm/asdf.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+export PATH=~/.local/bin/pip3:/home/mestrinari/.cargo/bin:$PATH
+
+

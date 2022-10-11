@@ -1,2 +1,4 @@
-alias ll='ls -lah'
+alias ll='exa --icons -lah'
+alias ls='exa --icons'
+alias cat='bat --style=auto'
 
