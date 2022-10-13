@@ -279,6 +279,7 @@ set $i3lockwall i3lock -i /home/mestrinari/dotfiles/i3/feh/lockscreen.png
 
 # Themes 
 
+
 # class                 border  bground text    indicator child_border
 client.focused          #181818 #181818 #ffffff #000000   #181818
 client.focused_inactive #232323 #232323 #ffffff #000000   #232323
@@ -288,23 +289,26 @@ client.placeholder      #282A36 #ffffff #F8F8F2 #000000   #282A36
 
 client.background       #F8F8F2
 
-bar {
-    i3bar_command i3bar  
-    status_command i3blocks $XDG_CONFIG_HOME/i3blocks/config  
-    font pango: DejaVu Sans Mono 10
-    workspace_min_width 35
-    position top
-    tray_output none
-    separator_symbol " | "
+exec_always --no-startup-id /home/mestrinari/.config/polybar/launch.sh
 
-    colors{
-    background #000000
-    statusline #ffffff
-    separator #486060
 
-    focused_workspace  #333333 #333333 #ffffff
-    active_workspace   #333333 #333333 #ffffff
-    inactive_workspace #070002 #070002 #ffffff
-    urgent_workspace   #2f343f #ebcb8b #2f343f
-    }
-}
+#bar {
+#    i3bar_command i3bar  
+#    status_command i3blocks $XDG_CONFIG_HOME/i3blocks/config  
+#    font pango: DejaVu Sans Mono 10
+#    workspace_min_width 35
+#    position top
+#    tray_output none
+#    separator_symbol " | "
+#
+#    colors{
+#    background #000000
+#    statusline #ffffff
+#    separator #486060
+#
+#    focused_workspace  #333333 #333333 #ffffff
+#    active_workspace   #333333 #333333 #ffffff
+#    inactive_workspace #070002 #070002 #ffffff
+#    urgent_workspace   #2f343f #ebcb8b #2f343f
+#    }
+#}
