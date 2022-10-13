@@ -154,6 +154,10 @@ mode "$mode_system" {
     bindsym Escape mode default
 }
 
+# Caps/Num lock extension for I3Blocks
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
 
 # ========================
 #  Workspaces and Windows
@@ -266,7 +270,7 @@ mode "$mode_gaps_inner" {
 ##############
 
 # Wallpaper and Lockscreen
-exec_always --no-startup-id feh --no-fehbg --bg-fill /home/mestrinari/dotfiles/i3/feh/DarkSouls.jpg
+exec_always --no-startup-id feh --bg-fill /home/mestrinari/dotfiles/i3/feh/DarkSouls.jpg
 set $i3lockwall i3lock -i /home/mestrinari/dotfiles/i3/feh/lockscreen.png
 
 # Colors
@@ -276,23 +280,31 @@ set $i3lockwall i3lock -i /home/mestrinari/dotfiles/i3/feh/lockscreen.png
 # Themes 
 
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused          #181818 #181818 #ffffff #000000   #181818
+client.focused_inactive #232323 #232323 #ffffff #000000   #232323
+client.unfocused        #000000 #232323 #888888 #000000   #000000
+client.urgent           #2f343f #ebcb8b #2f343f #000000   #2f343f
+client.placeholder      #282A36 #ffffff #F8F8F2 #000000   #282A36
 
 client.background       #F8F8F2
 
 bar {
-    font pango: FontAwesome 10 
+    i3bar_command i3bar  
+    status_command i3blocks $XDG_CONFIG_HOME/i3blocks/config  
+    font pango: DejaVu Sans Mono 10
+    workspace_min_width 35
     position top
     tray_output none
-    
-    status_command i3blocks $XDG_CONFIG_HOME/i3blocks/config 
+    separator_symbol " | "
 
+    colors{
+    background #000000
+    statusline #ffffff
+    separator #486060
 
-    
+    focused_workspace  #333333 #333333 #ffffff
+    active_workspace   #333333 #333333 #ffffff
+    inactive_workspace #070002 #070002 #ffffff
+    urgent_workspace   #2f343f #ebcb8b #2f343f
+    }
 }
-
-
