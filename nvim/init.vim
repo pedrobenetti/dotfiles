@@ -22,8 +22,14 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
+packadd vimball
 
+call plug#begin('~/.neovim/plugins')
 
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-tree/nvim-web-devicons' 
+Plug 'nvim-tree/nvim-tree.lua'
+call plug#end()
 
 
 

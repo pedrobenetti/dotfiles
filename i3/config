@@ -18,10 +18,10 @@ font pango: monospace 10
 # ==============
 #  Startup Apps
 # ==============
-#exec --no-startup-id dex --autostart --environment i3
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-#exec --no-startup-id nm-applet
-#exec --no-startup-id dunst
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id dunst
+exec_always i3-layouts 
 
 
 # =================
@@ -38,6 +38,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 #  Binding Keys
 # ==============
 
+# start dmenu 
+bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu'"
+
 # Floating Modifier 
 floating_modifier $mod
 
@@ -51,13 +54,11 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+Return exec urxvtc
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+c kill
 
 # Resize mode
 bindsym $mod+r mode "resize"
 
-# start dmenu 
-bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu'"
 # Take Screenshots
 bindsym $mod+p exec --no-startup-id deepin-screen-recorder 
 
@@ -163,7 +164,7 @@ bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 #  Workspaces and Windows
 # ========================
 
-workspace_auto_back_and_forth no
+workspace_auto_back_and_forth yes
 focus_follows_mouse no 
 
 title_align center
@@ -222,8 +223,8 @@ assign [class="Steam" instance="Steam"] $ws4
 #  Gaps
 # ======
 
-gaps inner 7
-gaps outer 10
+gaps inner 5
+gaps outer 7
 smart_gaps on
 hide_edge_borders smart
 
@@ -264,6 +265,20 @@ mode "$mode_gaps_inner" {
         bindsym Escape mode "default"
 }
 
+##############
+# i3 layouts #
+##############
+
+#set $i3l vstack to workspace $ws1
+#set $i3l hstack 0.6 up to workspace $ws2
+#set $i3l spiral 0.6 to workspace $ws3
+#set $i3l 3columns 0.66 0.5 2 left to workspace $ws4
+#set $i3l 2columns right to workspace $ws5
+#set $i3l companion 0.3 0.4 up to workspace $ws6
+#set $i3l autosplit to workspace $ws7
+
+bindsym $mod+o exec i3l vstack 0.6 && notify-send 'Layout Vstack'
+bindsym $mod+i exec i3l 3columns 0.66 0.5 2 && notify-send 'Layout 3Columns'
 
 ##############
 # APPEARANCE #
@@ -273,16 +288,9 @@ mode "$mode_gaps_inner" {
 exec_always --no-startup-id feh --bg-fill /home/mestrinari/dotfiles/i3/feh/DarkSouls.jpg
 set $i3lockwall i3lock -i /home/mestrinari/dotfiles/i3/feh/lockscreen.png
 
-# Colors
-
-# special
-
-# Themes 
-
-
 # class                 border  bground text    indicator child_border
-client.focused          #181818 #181818 #ffffff #000000   #181818
-client.focused_inactive #232323 #232323 #ffffff #000000   #232323
+client.focused          #181818 #181818 #ffffff #8f8a91   #8f8a91
+client.focused_inactive #232323 #232323 #ffffff #232323   #232323
 client.unfocused        #000000 #232323 #888888 #000000   #000000
 client.urgent           #2f343f #ebcb8b #2f343f #000000   #2f343f
 client.placeholder      #282A36 #ffffff #F8F8F2 #000000   #282A36

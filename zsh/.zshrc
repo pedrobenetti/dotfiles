@@ -67,6 +67,6 @@ source /opt/asdf-vm/asdf.sh
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-export PATH=~/.local/bin/pip3:/home/mestrinari/.cargo/bin:$PATH
+export PATH=$PATH:~/.local/bin/pip:~/.local/bin/pip3:~/.local/bin/pip3.10:/home/mestrinari/.cargo/bin
 
 
