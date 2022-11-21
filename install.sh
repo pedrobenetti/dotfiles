@@ -29,6 +29,13 @@ ln -s "$DOTFILES/X11" "$XDG_CONFIG_HOME"
 rm -rf "$XDG_CONFIG_HOME/i3"
 ln -s "$DOTFILES/i3" "$XDG_CONFIG_HOME"
 
+############
+# i3Blocks #
+############
+
+
+mkdir -p "$XDG_CONFIG_HOME/i3blocks"
+ln -sf "$DOTFILES/i3blocks/config" "$XDG_CONFIG_HOME/i3blocks"
 
 ########
 # zsh  #

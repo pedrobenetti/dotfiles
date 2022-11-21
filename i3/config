@@ -1,6 +1,3 @@
-# Should you change your keyboard layout some time, delete
-# this file and re-run i3-config-wizard(1).
-
 # =========
 #  Mod Key
 # =========
@@ -11,9 +8,10 @@ set $mod Mod4
 #  Fonts 
 # =======
 #font pango: MesloLGS NF 10
-#font pango:DejaVu Sans Mono 10
-font pango: monospace 10
-
+#font pango: DejaVu Sans Mono 10
+#font pango: monospace 10
+#font pango: Hack 10
+font pango: FuraCode NF 10
 
 # ==============
 #  Startup Apps
@@ -21,8 +19,7 @@ font pango: monospace 10
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id dunst
-exec_always i3-layouts 
-
+exec --no-startup-id picom
 
 # =================
 #  Volume Settings
@@ -51,7 +48,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # start terminal
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+c kill
@@ -96,17 +93,13 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+CTRL+h split h
-
-# split in vertical orientation
-bindsym $mod+CTRL+v split v
+bindsym $mod+semicolon split toggle
 
 # Fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+F11 fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+w layout toggle tabbed split
 bindsym $mod+e layout toggle split
 
 # focus the parent container
@@ -155,9 +148,7 @@ mode "$mode_system" {
     bindsym Escape mode default
 }
 
-# Caps/Num lock extension for I3Blocks
-bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
 
 
 # ========================
@@ -169,13 +160,28 @@ focus_follows_mouse no
 
 title_align center
 default_floating_border none
+default_border pixel 1
 #hide_edge_borders smart
 
 # Floating pop up automatically
 for_window [window_role="pop_up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="Arandr"] floating enable
-for_window [class=".*"] border pixel 3
+
+## Scratchpads
+for_window [instance="urxvt_scratchpad"] move to scratchpad , border none
+bindsym $mod+t [instance="urxvt_scratchpad"] scratchpad show
+exec --no-startup-id urxvtc -name urxvt_scratchpad
+
+for_window [instance="nemo_scratchpad"] move to scratchpad , border none
+bindsym $mod+s [instance="nemo_scratchpad"] scratchpad show 
+exec nemo -name nemo_scratchpad
+
+for_window [instance="deepin-draw"] move to scratchpad , border none
+bindsym $mod+b [instance="deepin-draw"] scratchpad show
+exec deepin-draw 
+
+
 
 
 # Workspaces Identifiers
@@ -224,7 +230,7 @@ assign [class="Steam" instance="Steam"] $ws4
 # ======
 
 gaps inner 5
-gaps outer 7
+gaps outer 5
 smart_gaps on
 hide_edge_borders smart
 
@@ -266,57 +272,65 @@ mode "$mode_gaps_inner" {
 }
 
 ##############
-# i3 layouts #
-##############
-
-#set $i3l vstack to workspace $ws1
-#set $i3l hstack 0.6 up to workspace $ws2
-#set $i3l spiral 0.6 to workspace $ws3
-#set $i3l 3columns 0.66 0.5 2 left to workspace $ws4
-#set $i3l 2columns right to workspace $ws5
-#set $i3l companion 0.3 0.4 up to workspace $ws6
-#set $i3l autosplit to workspace $ws7
-
-bindsym $mod+o exec i3l vstack 0.6 && notify-send 'Layout Vstack'
-bindsym $mod+i exec i3l 3columns 0.66 0.5 2 && notify-send 'Layout 3Columns'
-
-##############
 # APPEARANCE #
 ##############
 
 # Wallpaper and Lockscreen
-exec_always --no-startup-id feh --bg-fill /home/mestrinari/dotfiles/i3/feh/DarkSouls.jpg
+    exec_always --no-startup-id feh --bg-fill $XDG_CONFIG_HOME/i3/feh/DarkSouls.jpg
 set $i3lockwall i3lock -i /home/mestrinari/dotfiles/i3/feh/lockscreen.png
 
-# class                 border  bground text    indicator child_border
-client.focused          #181818 #181818 #ffffff #8f8a91   #8f8a91
-client.focused_inactive #232323 #232323 #ffffff #232323   #232323
-client.unfocused        #000000 #232323 #888888 #000000   #000000
-client.urgent           #2f343f #ebcb8b #2f343f #000000   #2f343f
-client.placeholder      #282A36 #ffffff #F8F8F2 #000000   #282A36
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
 
-client.background       #F8F8F2
+# green gruvbox
+# class                 border|backgr|text|indicator|child_border
+client.focused          $green $green $darkgray $purple $darkgray
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $red $red $white $red $red
 
-exec_always --no-startup-id /home/mestrinari/.config/polybar/launch.sh
+# blue gruvbox
+# class                 border|backgr|text|indicator|child_border
+#client.focused          $blue $blue $darkgray $purple $darkgray
+#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+#client.urgent           $red $red $white $red $red
 
 
-#bar {
-#    i3bar_command i3bar  
-#    status_command i3blocks $XDG_CONFIG_HOME/i3blocks/config  
-#    font pango: DejaVu Sans Mono 10
-#    workspace_min_width 35
-#    position top
-#    tray_output none
-#    separator_symbol " | "
-#
-#    colors{
-#    background #000000
-#    statusline #ffffff
-#    separator #486060
-#
-#    focused_workspace  #333333 #333333 #ffffff
-#    active_workspace   #333333 #333333 #ffffff
-#    inactive_workspace #070002 #070002 #ffffff
-#    urgent_workspace   #2f343f #ebcb8b #2f343f
-#    }
-#}
+#exec_always --no-startup-id /home/mestrinari/.config/polybar/launch.sh
+
+
+bar {
+    i3bar_command i3bar --transparency 
+    status_command i3blocks $XDG_CONFIG_HOME/i3blocks/config  
+    
+    #font pango: DejaVu Sans Mono 12
+    font pango: FuraCode NF 12
+    #font pango: Awesome NF
+    #font pango: MesloLGS FN-10
+
+    workspace_min_width 35
+    height 30
+    position top
+    tray_output none
+    separator_symbol " | "  
+
+    colors {
+        background #272727
+        statusline #000000
+        separator #486060
+
+        focused_workspace  #444444 #444444 #ffffff
+        active_workspace   #333333 #333333 #ffffff
+        inactive_workspace #272727 #272727 #ffffff
+        urgent_workspace   #d11d1d #d11d1d #2f343f
+    }
+}

@@ -69,4 +69,3 @@ source /opt/asdf-vm/asdf.sh
 
 export PATH=$PATH:~/.local/bin/pip:~/.local/bin/pip3:~/.local/bin/pip3.10:/home/mestrinari/.cargo/bin
 
-

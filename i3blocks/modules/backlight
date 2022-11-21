@@ -1,0 +1,4 @@
+#!/bin/bash
+BACKLIGHT=$(xbacklight -get | awk '{printf("%d", $1)}')
+
+echo " $BACKLIGHT"

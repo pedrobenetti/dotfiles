@@ -1,20 +1,28 @@
-# i3blocks configuration file
-#
-# The i3blocks man page describes the usage of the binary,
-# and its website describes the configuration:
-#
-#     https://vivien.github.io/i3blocks
-
-
-# Global properties
+command=$DOTFILES/i3blocks/modules/$BLOCK_NAME
 separator=true
-separator_block_width=15
+separator_block_width=30
+markup=none
+color=#ffffff
 
-[greetings]
-color=#f5af19
-command=echo $"DOTFILES"
+[updates]
 interval=once
 
+[battery]
+interval=10
+
+[volume]
+command=~/i3blocks-contrib/i3blocks-contrib-2.0.0/volume/volume
+interval=1
+label= 
+
+[backlight]
+interval=1
+
+[memory]
+interval=30
+
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+instance=sp
+TZ=America/Sao_Paulo
+command=date +" %H:%M   %a, %d %b "
 interval=1

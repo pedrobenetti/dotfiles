@@ -13,6 +13,7 @@ set undoreload=10000
 
 " Set line number
 set number
+set relativenumber
 
 " Use 4 spaces instead of tab ()
 " Copy indent from current line when starting a new line
@@ -24,18 +25,18 @@ set shiftwidth=4
 
 packadd vimball
 
-call plug#begin('~/.neovim/plugins')
+source $XDG_CONFIG_HOME/nvim/vim-plug/plugins.vim
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-tree/nvim-web-devicons' 
-Plug 'nvim-tree/nvim-tree.lua'
-call plug#end()
+set t_Co=256
+syntax on
 
 
 
-
-
-
+set termguicolors     " enable true colors support
+let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 
 
