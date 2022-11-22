@@ -26,7 +26,7 @@ set shiftwidth=4
 packadd vimball
 
 source $XDG_CONFIG_HOME/nvim/vim-plug/plugins.vim
-
+source $XDG_CONFIG_HOME/nvim/plug-config/coc.vim
 set t_Co=256
 syntax on
 

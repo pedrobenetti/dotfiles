@@ -7,6 +7,9 @@
 mkdir -p "$XDG_CONFIG_HOME/nvim"
 mkdir -p "$XDG_CONFIG_HOME/nvim/undo"
 ln -sf "$DOTFILES/nvim/init.vim" "$XDG_CONFIG_HOME/nvim" 
+ln -sf "$DOTFILES/nvim/autoload" "$XDG_CONFIG_HOME/nvim" 
+ln -sf "$DOTFILES/nvim/vim-plug" "$XDG_CONFIG_HOME/nvim" 
+ln -sf "$DOTFILES/nvim/plug-config" "$XDG_CONFIG_HOME/nvim" 
 
 #############
 # Alacritty #

@@ -8,10 +8,10 @@ set $mod Mod4
 #  Fonts 
 # =======
 #font pango: MesloLGS NF 10
-#font pango: DejaVu Sans Mono 10
+font pango: DejaVu Sans Mono 10
 #font pango: monospace 10
 #font pango: Hack 10
-font pango: FuraCode NF 10
+#font pango: FuraCode NF 10
 
 # ==============
 #  Startup Apps
