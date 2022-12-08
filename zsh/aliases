@@ -1,4 +1,13 @@
-alias ll='exa --icons -lah'
-alias ls='exa --icons'
-alias cat='bat --style=auto'
+alias ll="exa --icons -lah"
+alias lss="exa --icons"
+alias cat="bat --style=auto"
+alias ls="exa --icons -1"
 
+
+alias cs="print '\033c'"
+
+alias mk="make"
+
+
+
+alias rs="source $XDG_CONFIG_HOME/zsh/aliases"

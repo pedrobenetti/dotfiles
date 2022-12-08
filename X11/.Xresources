@@ -86,17 +86,15 @@
 !*.color7:  #a89984
 !*.color15: #ebdbb2
 
-URxvt*font: xft:MesloLGS NF-12
-!URxvt*font: xft:Hack Nerd Font-12 
-!URxvt*font: xft:Fira Code-12
-!URxvt*font: xft: FuraMono Nerd Font:size=12
+!URxvt*font: xft:MesloLGS NF-12
+URxvt*font: xft:DejaVuSansMono Nerd Font Mono-14
 
 *antialias: true
 *autohint: true
 
 URxvt*letterspace: -2
 URxvt.transparent: true
-URxvt.shading: 20
+URxvt.shading: 30
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 4

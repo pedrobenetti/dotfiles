@@ -1,11 +1,12 @@
 env:
   TERM: alacritty
 
-padding:
-  x: 2
-  y: 2
+window:
+  padding:
+    x: 3
+    y: 3
 
-window.opacity: 0.8
+  opacity: 0.7
 
 title: Alacritty
 
@@ -16,41 +17,29 @@ history: 10000
   
 font:
   normal:
-    #family: FuraMono Nerd Font
-    #family: MesloLGS NF
-    family: DejaVu Sans Mono
+    family: DejaVuSansMono Nerd Font Mono 
     style: Regular
-
   bold:
-    #family: FuraMono Nerd Font
-    #family: MesloLGS NF
-    family: DejaVu Sans Mono
+    family: DejaVuSansMono Nerd Font Mono
     style: Bold
-
   italic:
-    #family: FuraMono Nerd Font
-    #family: MesloLGS NF
-    family: DejaVu Sans Mono
+    family: DejaVuSansMono Nerd Font Mono
     style: Italic
-
   bold_italic:
-    #family: FuraMono Nerd Font
-    #family: MesloLGS NF
-    family: DejaVu Sans Mono
+    family: DejaVuSansMono Nerd Font Mono
     style: Bold Italic
 
   size: 9
 
-# Colors (Ayu Dark)
+
 colors:
-  # Default colors
   primary:
     #background: '#0a0c0e'
-    background: '#0f1419'
-      #background: '#1e1e1e'
+    #background: '#0f1419'
+    background: '#000000'
+    #background: '#1e1e1e'
     foreground: '#B3B1AD'
 
-  # Normal colors
   normal:
     black: '#01060E'
     red: '#EA6C73'
@@ -61,7 +50,6 @@ colors:
     cyan: '#90E1C6'
     white: '#C7C7C7'
 
-  # Bright colors
   bright:
     black: '#686868'
     red: '#F07178'
@@ -71,6 +59,7 @@ colors:
     magenta: '#FFEE99'
     cyan: '#95E6CB'
     white: '#FFFFFF'
+
     #colors:
     #  primary:
     #    background: '#282828'

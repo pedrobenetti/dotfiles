@@ -8,7 +8,7 @@ set $mod Mod4
 #  Fonts 
 # =======
 #font pango: MesloLGS NF 10
-font pango: DejaVu Sans Mono 10
+font pango: DejaVuSansMono Nerd Font 10
 #font pango: monospace 10
 #font pango: Hack 10
 #font pango: FuraCode NF 10
@@ -19,7 +19,7 @@ font pango: DejaVu Sans Mono 10
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id dunst
-exec --no-startup-id picom
+exec --no-startup-id picom --experimental-backend
 
 # =================
 #  Volume Settings
@@ -29,7 +29,6 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
 
 # ==============
 #  Binding Keys
@@ -161,7 +160,7 @@ focus_follows_mouse no
 title_align center
 default_floating_border none
 default_border pixel 1
-#hide_edge_borders smart
+hide_edge_borders smart
 
 # Floating pop up automatically
 for_window [window_role="pop_up"] floating enable
@@ -172,17 +171,6 @@ for_window [class="Arandr"] floating enable
 for_window [instance="urxvt_scratchpad"] move to scratchpad , border none
 bindsym $mod+t [instance="urxvt_scratchpad"] scratchpad show
 exec --no-startup-id urxvtc -name urxvt_scratchpad
-
-for_window [instance="nemo_scratchpad"] move to scratchpad , border none
-bindsym $mod+s [instance="nemo_scratchpad"] scratchpad show 
-exec nemo -name nemo_scratchpad
-
-for_window [instance="deepin-draw"] move to scratchpad , border none
-bindsym $mod+b [instance="deepin-draw"] scratchpad show
-exec deepin-draw 
-
-
-
 
 # Workspaces Identifiers
 set $ws1 "1"
@@ -229,10 +217,9 @@ assign [class="Steam" instance="Steam"] $ws4
 #  Gaps
 # ======
 
-gaps inner 5
+gaps inner 11
 gaps outer 5
 smart_gaps on
-hide_edge_borders smart
 
 set $mode_gaps Gaps: (o)uter, (i)nner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -276,7 +263,9 @@ mode "$mode_gaps_inner" {
 ##############
 
 # Wallpaper and Lockscreen
-    exec_always --no-startup-id feh --bg-fill $XDG_CONFIG_HOME/i3/feh/DarkSouls.jpg
+#exec_always --no-startup-id feh --bg-fill $XDG_CONFIG_HOME/i3/feh/DarkSouls.jpg
+#exec_always --no-startup-id feh --bg-fill $XDG_CONFIG_HOME/i3/feh/trilhos.jpg
+exec_always --no-startup-id feh --bg-fill $XDG_CONFIG_HOME/i3/feh/Halloween-Kills-1978-Flashback-Mask1.png
 set $i3lockwall i3lock -i /home/mestrinari/dotfiles/i3/feh/lockscreen.png
 
 # set primary gruvbox colorscheme colors
@@ -289,12 +278,12 @@ set $purple #b16286
 set $aqua #689d68
 set $gray #a89984
 set $darkgray #1d2021
-
+set $indicator #333333
 # green gruvbox
 # class                 border|backgr|text|indicator|child_border
-client.focused          $green $green $darkgray $purple $darkgray
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.focused          $green $green $darkgray $indicator $darkgray
+client.focused_inactive $darkgray $darkgray $yellow $indicator $darkgray
+client.unfocused        $darkgray $darkgray $yellow $indicator $darkgray
 client.urgent           $red $red $white $red $red
 
 # blue gruvbox
@@ -312,10 +301,7 @@ bar {
     i3bar_command i3bar --transparency 
     status_command i3blocks $XDG_CONFIG_HOME/i3blocks/config  
     
-    #font pango: DejaVu Sans Mono 12
-    font pango: FuraCode NF 12
-    #font pango: Awesome NF
-    #font pango: MesloLGS FN-10
+    font pango: DejaVuSansMono Nerd Font 12
 
     workspace_min_width 35
     height 30
@@ -324,13 +310,13 @@ bar {
     separator_symbol " | "  
 
     colors {
-        background #272727
+        background #000000
         statusline #000000
         separator #486060
 
         focused_workspace  #444444 #444444 #ffffff
         active_workspace   #333333 #333333 #ffffff
-        inactive_workspace #272727 #272727 #ffffff
+        inactive_workspace #000000 #000000 #ffffff
         urgent_workspace   #d11d1d #d11d1d #2f343f
     }
 }
