@@ -21,6 +21,8 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id dunst
 exec --no-startup-id picom --experimental-backend
 
+exec_always --no-startup-id urxvtc -name urxvt_scratchpad
+#exec_always --no-startup-id spotify-launcher
 # =================
 #  Volume Settings
 # =================
@@ -168,9 +170,13 @@ for_window [window_role="task_dialog"] floating enable
 for_window [class="Arandr"] floating enable
 
 ## Scratchpads
-for_window [instance="urxvt_scratchpad"] move to scratchpad , border none
+for_window [instance="urxvt_scratchpad"] move to scratchpad , border pixel 5
 bindsym $mod+t [instance="urxvt_scratchpad"] scratchpad show
-exec --no-startup-id urxvtc -name urxvt_scratchpad
+
+
+#for_window [instance="spotify"] move to scratchpad , border none
+#bindsym $mod+y [instance="spotify"] scratchpad show
+
 
 # Workspaces Identifiers
 set $ws1 "1"
