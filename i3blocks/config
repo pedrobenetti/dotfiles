@@ -19,6 +19,11 @@ interval=once
 markup=pango
 LABEL= 
 
+separator=false
+[space]
+full_text=         
+separator=false
+
 [battery]
 interval=10
 
@@ -27,12 +32,12 @@ command=~/i3blocks-contrib/i3blocks-contrib-2.0.0/volume/volume
 interval=1
 label= 
 
-[brightness]
-command=$DOTFILES/i3blocks/modules/brightness -a /sys/class/backlight/intel_backlight/actual_brightness -m /sys/class/backlight/intel_backlight/max_brightness
-interval=persist
+#[brightness]
+#command=$DOTFILES/i3blocks/modules/brightness -a /sys/class/backlight/intel_backlight/actual_brightness -m /sys/class/backlight/intel_backlight/max_brightness
+#interval=persist
 
-[memory]
-interval=30
+#[memory]
+#interval=30
 
 [time]
 instance=sp
